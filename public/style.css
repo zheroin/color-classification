@@ -1,0 +1,18 @@
+*{
+  margin:0;
+  padding: 0;
+  font-size: 20px;
+
+  }
+  body{
+    /* background-color:#41B3A3; */
+  }
+
+  .bodyArea{
+
+    text-align: center;
+
+}
+.buttons-group{
+  margin-top: 30px;
+}

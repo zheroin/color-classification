@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/addons/p5.dom.min.js"></script>
+
+  <!-- firebase setup -->
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-firestore.js"></script>
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+  
+
+  <link rel="stylesheet" href="/style.css">
+  <title>Color Classification</title>
+</head>
+
+<body>
+  <div class="bodyArea" id="SketchHolder">
+
+  </div>
+  <div class='buttons-group'>
+    <button id="Red"  onclick="giveColor(this.id)" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Red-ish</button>
+    <button id="Blue"  onclick="giveColor(this.id)" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Blue-ish</button>
+    <button id="Green"  onclick="giveColor(this.id)" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Green-ish</button>
+    <button id="Yellow"  onclick="giveColor(this.id)" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Yellow-ish</button>
+    <button id="Brown"  onclick="giveColor(this.id)" class="bg-orange-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Brown-ish</button>
+    <button id="Purple"  onclick="giveColor(this.id)" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Purple-ish</button>
+    <button id="Pink"  onclick="giveColor(this.id)" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Pink-ish</button>
+    <button id="Gray"  onclick="giveColor(this.id)" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Gray-ish</button>
+
+  </div>
+</body>
+<script src="./sketch.js" charset="utf-8"></script>
+
+</html>

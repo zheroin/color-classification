@@ -1,0 +1,15 @@
+{
+  "name": "color-classification",
+  "version": "1.0.0",
+  "description": "\"color classification using Tensorflow js\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sumit Dey",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.2"
+  }
+}
