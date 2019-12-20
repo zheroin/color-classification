@@ -1,18 +1,43 @@
-*{
-  margin:0;
+* {
+  margin: 0;
   padding: 0;
   font-size: 20px;
+}
 
-  }
-  body{
-    /* background-color:#41B3A3; */
-  }
+body {
+  /* background-color:#41B3A3; */
+}
 
-  .bodyArea{
+.p5Canvas {
+  width: 440px;
+  height: 380px;
+  display: inline-block;
+  margin: 50px 100px;
+}
 
-    text-align: center;
+.bodyArea {
+  text-align: center;
+}
+
+.buttons-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 30px 200px;
+
 
 }
-.buttons-group{
+.big-buttons-holder{
   margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+}
+
+#DataButton ,#ColorButton {
+  display: block;
+  height: 70px;
+  width: 300px;
+}
+#ReColorBgButton{
+   /* visibility: hidden; */
 }

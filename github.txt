@@ -1,2 +1,3 @@
 create a repo
 grab the https of the repo
+in the terminal/command line, type git remote add origin [copied web address]
