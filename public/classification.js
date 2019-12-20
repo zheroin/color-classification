@@ -12,7 +12,7 @@ let labelsList = [
   "Purple-ish"
 ]
 
-
+var lossP, graphP;
 //Load the data
 function preload() {
   data = loadJSON('colorData .json');
@@ -21,6 +21,8 @@ function preload() {
 
 //extract the independent(input-r,g,b) and dependent variable(output-label)
 function setup() {
+  lossP = createP('loss');
+  graphP = createP('make a grpah of loss against ip batch or epoch');
   //console.log(data.entries.length);
   var colors = []; //i/p
   var labels = []; //o/p
@@ -95,23 +97,40 @@ function setup() {
   //fit the model with th i/p nodes and o/p nodes
   //model.fit returns a promise where the resuls will be passed in
   //it means once you fit the model then log the resuls
-  train();
+  train().then(
+    (results) => {
+      //console.log(results.history.loss);
+    }
+  );
 
 }
 
-function train() {
+async function train() {
   const options = {
     epochs: 80,
     validationSplit: 0.1,
-    shuffle: true
-  }
-  model.fit(xs, ys, options).then(
-    (results) => {
-      console.log(results.history.loss);
+    shuffle: true,
+    callbacks: {
+      onTrainBegin: () => console.log("Training starts"),
+      onTrainEnd: () => console.log("Traing complete"),
+      onBatchEnd: async (num, logs) => {
+        await tf.nextFrame();
+      },
+      onEpochEnd: async (num, logs) => {
+        console.log('Epoch: ', num);
+        lossP.html("Loss: " + logs.loss);
+      }
     }
-  );
+  }
+  return await model.fit(xs, ys, options);
 }
 
 function draw() {
+
   background(0);
+  stroke(255);
+  strokeWeight(5);
+  line(frameCount % width, 0, frameCount % width, height);
+
+
 }
