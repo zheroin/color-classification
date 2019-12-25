@@ -1,6 +1,8 @@
 //P5 :// preload() runs once ,setup() waits until preload() is done
 let data, xs, ys;
 let model;
+let rSlider, gSlider, bSlider;
+var lossP, graphP, predictP;
 let labelsList = [
   "Green-ish",
   "Blue-ish",
@@ -12,18 +14,24 @@ let labelsList = [
   "Purple-ish"
 ]
 
-var lossP, graphP;
+
 //Load the data
 function preload() {
-  data = loadJSON('colorData .json');
+  data = loadJSON('colorData-1.json');
   console.log("data loaded");
 }
 
 //extract the independent(input-r,g,b) and dependent variable(output-label)
 function setup() {
+  //create 3 sliders to adjust the color
+  //createSlider(min, max, [value], [step])
+  rSlider = createSlider(0, 255, 255);
+  gSlider = createSlider(0, 255, 0);
+  bSlider = createSlider(0, 255, 0);
+  predictP = createP('color');
   lossP = createP('loss');
-  graphP = createP('make a grpah of loss against ip batch or epoch');
-  //console.log(data.entries.length);
+  graphP = createP('make a graph of loss against ip batch or epoch');
+  console.log("length", data.entries.length);
   var colors = []; //i/p
   var labels = []; //o/p
 
@@ -68,7 +76,7 @@ function setup() {
   //2 layers NN model :1 hidden layer and the  o/p layer
   //1st hidden layer also the 1st layer of our network
   let hidden = tf.layers.dense({
-    units: 3,
+    units: 16, //* 16
     activation: 'sigmoid',
     inputDim: 3
   });
@@ -99,7 +107,7 @@ function setup() {
   //it means once you fit the model then log the resuls
   train().then(
     (results) => {
-      //console.log(results.history.loss);
+      console.log(results.history.loss);
     }
   );
 
@@ -117,20 +125,37 @@ async function train() {
         await tf.nextFrame();
       },
       onEpochEnd: async (num, logs) => {
-        console.log('Epoch: ', num);
-        lossP.html("Loss: " + logs.loss);
+        //console.log('Epoch: ', num);
+        lossP.html("Epoch : " + num + ", Loss: " + logs.loss);
       }
     }
   }
+
   return await model.fit(xs, ys, options);
 }
 
 function draw() {
+  let rVal = rSlider.value();
+  let gVal = gSlider.value();
+  let bVal = bSlider.value();
 
-  background(0);
-  stroke(255);
-  strokeWeight(5);
-  line(frameCount % width, 0, frameCount % width, height);
+  background(rVal, gVal, bVal);
+
+  //memory management in tensor flow
+  tf.tidy(() => {
+    const xs = tf.tensor2d([
+      [rVal / 255, gVal / 255, bVal / 255]
+    ]);
+    let result = model.predict(xs);
+    let index = result.argMax(1).dataSync()[0]; //pull out the max prob value
+    //console.log(index);
+    //label.print();
+    predictP.html(labelsList[index]);
+  })
+
+  //stroke(255);
+  //strokeWeight(5);
+  //line(frameCount % width, 0, frameCount % width, height);
 
 
 }

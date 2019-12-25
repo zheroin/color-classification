@@ -119,7 +119,7 @@ const colorData = () => {
   document.getElementById('ReColorBgButton').style.display = "block";
   createCanvas(400, 400).parent('Colors-holder');
 
-  ish = colorByLabel['Gray-ish'];
+  ish = colorByLabel['Yellow-ish'];
 
   for (let i = 0; i < ish.length; i++) {
     rect(x, y, 40, 40);
